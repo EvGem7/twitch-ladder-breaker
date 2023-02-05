@@ -16,15 +16,18 @@ fun main(args: Array<String>): Unit = runBlocking {
         nickname = nickname,
         password = password
     )
-    println("connected server ${server.welcomeMessage} ${server.motd}")
+    println("connected server ${server.welcomeMessage}")
     val channel = server.joinChannel(channelName)
     println("joined channel ${channel.name}")
-    server
+
+    val ladderBreaker = LadderBreaker()
+    channel
         .messages
         .filterIsInstance<PrivateMessage>()
-        .collect {
-            if (it.text.contains("ping")) {
-                channel.sendMessage("pong")
+        .collect { message ->
+            ladderBreaker.getBreak(message.text)?.let {
+                channel.sendMessage(it.breakingText)
+                println("Broke a ladder from ${message.user}. The ladder consisted of ${it.ladderComponent}")
             }
         }
 }
