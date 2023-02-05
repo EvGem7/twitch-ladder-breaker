@@ -5,7 +5,6 @@ import kotlinx.coroutines.runBlocking
 import me.evgem.irk.client.IrkClient
 import me.evgem.irk.client.joinChannel
 import me.evgem.irk.client.model.message.PrivateMessage
-import me.evgem.irk.client.util.IrkLog
 
 fun main(args: Array<String>): Unit = runBlocking {
     val channelName = args.getOrElse(0) { return@runBlocking printUsage() }
@@ -24,7 +23,9 @@ fun main(args: Array<String>): Unit = runBlocking {
         .messages
         .filterIsInstance<PrivateMessage>()
         .collect {
-            println("${it.user}: ${it.text}")
+            if (it.text.contains("ping")) {
+                channel.sendMessage("pong")
+            }
         }
 }
 
