@@ -1,0 +1,12 @@
+[Unit]
+Description = Breaks ladders in a twitch chat
+Requires=network-online.target
+After=network-online.target
+[Service]
+WorkingDirectory={your working directory here}
+ExecStart={your path to the executable here}
+TimeoutStopSec=10
+Restart=always
+RestartSec=5
+[Install]
+WantedBy=multi-user.target
