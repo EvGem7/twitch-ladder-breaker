@@ -27,6 +27,11 @@ kotlin {
         }
     }
     sourceSets {
+        val commonMain by getting {
+            dependencies {
+                implementation(project(":irk-client"))
+            }
+        }
         val nativeMain by getting
         val nativeTest by getting
     }

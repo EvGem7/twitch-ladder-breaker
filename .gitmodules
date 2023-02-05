@@ -1,0 +1,3 @@
+[submodule "irk-client"]
+	path = irk-client
+	url = git@github.com:EvGem7/irk-client.git
